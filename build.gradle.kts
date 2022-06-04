@@ -1,11 +1,12 @@
 plugins {
-	id 'maven-publish'
+	`maven-publish`
 	alias(libs.plugins.quilt.loom)
 }
 
-archivesBaseName = project.archives_base_name
-version = project.version
-group = project.maven_group
+//archivesBaseName = project.archives_base_name
+version = "0.0.0-beta+1.18.2"
+group = "gay.pyrrha"
+base.archivesName.set("DisQuilt")
 
 repositories {
 	// Add repositories to retrieve artifacts from in here.
@@ -18,30 +19,30 @@ repositories {
 // All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
 // See https://docs.gradle.org/current/userguide/platforms.html for information on how version catalogs work.
 dependencies {
-	minecraft libs.minecraft
-	mappings loom.layered {
-		addLayer quiltMappings.mappings("org.quiltmc:quilt-mappings:${libs.versions.quilt.mappings.get()}:v2")
+	minecraft(libs.minecraft)
+	mappings(loom.layered {
+		addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${libs.versions.quilt.mappings.get()}:v2"))
 		// officialMojangMappings() // Uncomment if you want to use Mojang mappings as your primary mappings, falling back on QM for parameters and Javadocs
-	}
-	modImplementation libs.quilt.loader
+	})
+	modImplementation(libs.quilt.loader)
 
 	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
 	// Quilted Fabric API will automatically pull in the correct QSL version.
-	modImplementation libs.quilted.fabric.api
+	modImplementation(libs.quilted.fabric.api)
 }
 
-processResources {
-	inputs.property "version", version
+tasks.processResources {
+	inputs.property("version", version)
 
-	filesMatching('quilt.mod.json') {
-		expand "version": version
+	filesMatching("quilt.mod.json") {
+		expand ("version" to version)
 	}
 }
 
-tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = "UTF-8"
+tasks.withType<JavaCompile>().configureEach {
+	options.encoding = "UTF-8"
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+	options.release.set(17)
 }
 
 java {
@@ -59,18 +60,18 @@ java {
 }
 
 // If you plan to use a different file for the license, don't forget to change the file name here!
-jar {
+tasks.jar {
 	from("LICENSE") {
-		rename { "${it}_${archivesBaseName}" }
+		rename { "${it}_${base.archivesName}" }
 	}
 }
 
 // Configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
+        create("mavenJava", MavenPublication::class.java) {
+            from(components["java"])
+        }
 	}
 
 	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
