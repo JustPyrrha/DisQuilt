@@ -1,6 +1,6 @@
-package gay.pyrrha.disquilt.mixin;
+package gay.pyrrha.qord.mixin;
 
-import gay.pyrrha.disquilt.DisQuilt;
+import gay.pyrrha.qord.Qord;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class TitleScreenMixin {
 	@Inject(method = "init", at = @At("TAIL"))
 	public void onInit(CallbackInfo ci) {
-		DisQuilt.LOGGER.info("This line is printed by an example mod mixin!");
+		Qord.LOGGER.info("This line is printed by an example mod mixin!");
 	}
 }

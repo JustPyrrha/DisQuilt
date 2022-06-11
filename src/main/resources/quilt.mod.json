@@ -2,10 +2,10 @@
 	"schema_version": 1,
 	"quilt_loader": {
 		"group": "gay.pyrrha",
-		"id": "disquilt",
+		"id": "qord",
 		"version": "${version}",
 		"metadata": {
-			"name": "DisQuilt",
+			"name": "Qord",
 			"description": "Highly customizable Discord integration.",
 			"contributors": {
 				"JustPyrrha": "Owner"
@@ -15,11 +15,11 @@
 				"issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
 				"sources": "https://github.com/QuiltMC/quilt-template-mod"
 			},
-			"icon": "assets/disquilt/icon.png"
+			"icon": "assets/qord/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"client_init": "gay.pyrrha.disquilt.DisQuilt"
+			"client_init": "gay.pyrrha.qord.Qord"
 		},
 		"depends": [
 			{
@@ -36,5 +36,5 @@
 			}
 		]
 	},
-	"mixin": "disquilt.mixins.json"
+	"mixin": "qord.mixins.json"
 }

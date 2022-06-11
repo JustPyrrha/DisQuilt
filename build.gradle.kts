@@ -6,14 +6,10 @@ plugins {
 //archivesBaseName = project.archives_base_name
 version = "0.0.0-beta+1.18.2"
 group = "gay.pyrrha"
-base.archivesName.set("DisQuilt")
+base.archivesName.set("Qord")
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	maven("https://maven.jaackson.me/repo/")
 }
 
 // All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
@@ -25,6 +21,8 @@ dependencies {
 		// officialMojangMappings() // Uncomment if you want to use Mojang mappings as your primary mappings, falling back on QM for parameters and Javadocs
 	})
 	modImplementation(libs.quilt.loader)
+
+    include(modImplementation("com.jagrosh:DiscordIPC:0.5") {})
 
 	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
 	// Quilted Fabric API will automatically pull in the correct QSL version.
